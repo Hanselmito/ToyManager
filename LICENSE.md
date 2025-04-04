@@ -1,0 +1,1 @@
+Este `README.md` proporciona una descripción clara y completa de la aplicación ToyManager, incluyendo sus características, tecnologías utilizadas, requisitos, instalación, uso, contribuciones y licencia.
