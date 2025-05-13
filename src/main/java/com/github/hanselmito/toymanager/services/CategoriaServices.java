@@ -1,17 +1,51 @@
 package com.github.hanselmito.toymanager.services;
 
+import com.github.hanselmito.toymanager.model.Categoria;
+import com.github.hanselmito.toymanager.model.Producto;
+import com.github.hanselmito.toymanager.repositories.CategoriaRepository;
+import com.github.hanselmito.toymanager.repositories.ProductoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+@Service
 public class CategoriaServices {
-    /**
-     // Aquí puedes implementar los métodos de servicio para la entidad Usuario
-     // Por ejemplo, métodos para crear, leer, actualizar y eliminar usuarios.
-     // También puedes implementar la lógica de negocio relacionada con los usuarios.
 
-     // Ejemplo de método para obtener un usuario por su ID
-     public Usuario getCategoriaById(Integer id) {
-     // Lógica para obtener un usuario por su ID
-     return null; // Reemplaza esto con la implementación real
-     }
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
-     // Otros métodos según sea necesario...
-     **/
+    @Autowired
+    private ProductoRepository productoRepository;
+
+    public void asignarCategorias(Producto producto, Set<Categoria> categorias) {
+        Set<Categoria> categoriasFinales = new LinkedHashSet<>(categorias);
+
+        for (Categoria categoria : categorias) {
+            while (categoria.getCategoriaPadre() != null) {
+                categoriasFinales.add(categoria.getCategoriaPadre());
+                categoria = categoria.getCategoriaPadre();
+            }
+        }
+
+        producto.setCategorias(categoriasFinales);
+        productoRepository.save(producto);
+    }
+
+    public List<Categoria> findAll() {
+        return null;
+    }
+
+    public Categoria findById(Integer id) {
+        return null;
+    }
+
+    public Categoria save(Categoria categoria) {
+        return null;
+    }
+
+    public void deleteById(Integer id) {
+    }
 }

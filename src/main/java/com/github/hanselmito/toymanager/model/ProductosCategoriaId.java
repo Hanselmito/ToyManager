@@ -2,12 +2,16 @@ package com.github.hanselmito.toymanager.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.Hibernate;
 
 import java.util.Objects;
 
-
+@Getter
+@Setter
 @Embeddable
 public class ProductosCategoriaId implements java.io.Serializable {
     private static final long serialVersionUID = -2025872717238898366L;
@@ -18,22 +22,6 @@ public class ProductosCategoriaId implements java.io.Serializable {
     @NotNull
     @Column(name = "categorias_id", nullable = false)
     private Integer categoriasId;
-
-    public Integer getProductosId() {
-        return productosId;
-    }
-
-    public void setProductosId(Integer productosId) {
-        this.productosId = productosId;
-    }
-
-    public Integer getCategoriasId() {
-        return categoriasId;
-    }
-
-    public void setCategoriasId(Integer categoriasId) {
-        this.categoriasId = categoriasId;
-    }
 
     @Override
     public boolean equals(Object o) {
