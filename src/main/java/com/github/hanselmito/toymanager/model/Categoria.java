@@ -38,68 +38,12 @@ public class Categoria {
     @Column(name = "fecha_creacion", nullable = false)
     private Instant fechaCreacion;
 
-    @OneToMany(mappedBy = "categoria")
-    private Set<CateggoriasUsuario> categgoriasUsuarios = new LinkedHashSet<>();
-
     @OneToMany(mappedBy = "categoriaPadre")
     private Set<Categoria> categorias = new LinkedHashSet<>();
 
     @ManyToMany
+    @JoinTable(name = "productos_categorias",
+            joinColumns = @JoinColumn(name = "categorias_id"))
     private Set<com.github.hanselmito.toymanager.model.Producto> productos = new LinkedHashSet<>();
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Categoria getCategoriaPadre() {
-        return categoriaPadre;
-    }
-
-    public void setCategoriaPadre(Categoria categoriaPadre) {
-        this.categoriaPadre = categoriaPadre;
-    }
-
-    public Instant getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Instant fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public Set<CateggoriasUsuario> getCateggoriasUsuarios() {
-        return categgoriasUsuarios;
-    }
-
-    public void setCateggoriasUsuarios(Set<CateggoriasUsuario> categgoriasUsuarios) {
-        this.categgoriasUsuarios = categgoriasUsuarios;
-    }
-
-    public Set<Categoria> getCategorias() {
-        return categorias;
-    }
-
-    public void setCategorias(Set<Categoria> categorias) {
-        this.categorias = categorias;
-    }
-
-    public Set<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(Set<Producto> productos) {
-        this.productos = productos;
-    }
 }

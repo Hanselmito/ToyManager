@@ -1,14 +1,21 @@
 package com.github.hanselmito.toymanager.model;
 
+import com.github.hanselmito.toymanager.model.Enum.RolTrabajador;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
@@ -33,9 +40,9 @@ public class Usuario {
     private String contrasena;
 
     @NotNull
-    @Lob
+    @Enumerated(EnumType.STRING)
     @Column(name = "rol", nullable = false)
-    private String rol;
+    private RolTrabajador rol;
 
     @NotNull
     @Column(name = "imagen", nullable = false)
@@ -47,91 +54,30 @@ public class Usuario {
     private Instant ultimoAcceso;
 
     @OneToMany(mappedBy = "usuario")
-    private Set<CateggoriasUsuario> categgoriasUsuarios = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "usuario")
     private Set<ProductosUsuario> productosUsuarios = new LinkedHashSet<>();
 
-    @ManyToMany
-    private Set<Proveedore> proveedores = new LinkedHashSet<>();
 
-    public Integer getId() {
-        return id;
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(id, usuario.id) && Objects.equals(nombre, usuario.nombre) && Objects.equals(email, usuario.email);
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nombre, email);
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
-
-    public byte[] getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
-    }
-
-    public Instant getUltimoAcceso() {
-        return ultimoAcceso;
-    }
-
-    public void setUltimoAcceso(Instant ultimoAcceso) {
-        this.ultimoAcceso = ultimoAcceso;
-    }
-
-    public Set<CateggoriasUsuario> getCateggoriasUsuarios() {
-        return categgoriasUsuarios;
-    }
-
-    public void setCateggoriasUsuarios(Set<CateggoriasUsuario> categgoriasUsuarios) {
-        this.categgoriasUsuarios = categgoriasUsuarios;
-    }
-
-    public Set<ProductosUsuario> getProductosUsuarios() {
-        return productosUsuarios;
-    }
-
-    public void setProductosUsuarios(Set<ProductosUsuario> productosUsuarios) {
-        this.productosUsuarios = productosUsuarios;
-    }
-
-    public Set<Proveedore> getProveedores() {
-        return proveedores;
-    }
-
-    public void setProveedores(Set<Proveedore> proveedores) {
-        this.proveedores = proveedores;
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", email='" + email + '\'' +
+                ", contrasena='" + contrasena + '\'' +
+                ", rol=" + rol +
+                ", ultimoAcceso=" + ultimoAcceso +
+                '}';
     }
 }

@@ -1,10 +1,13 @@
 package com.github.hanselmito.toymanager.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-
+@Getter
+@Setter
 @Entity
 @Table(name = "productos_proveedores")
 public class ProductosProveedore {
@@ -23,27 +26,4 @@ public class ProductosProveedore {
     @JoinColumn(name = "proveedor_id", nullable = false)
     private com.github.hanselmito.toymanager.model.Proveedore proveedor;
 
-    public ProductosProveedoreId getId() {
-        return id;
-    }
-
-    public void setId(ProductosProveedoreId id) {
-        this.id = id;
-    }
-
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
-
-    public Proveedore getProveedor() {
-        return proveedor;
-    }
-
-    public void setProveedor(Proveedore proveedor) {
-        this.proveedor = proveedor;
-    }
 }

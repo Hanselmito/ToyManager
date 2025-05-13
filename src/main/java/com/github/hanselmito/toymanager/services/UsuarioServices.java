@@ -1,18 +1,18 @@
 package com.github.hanselmito.toymanager.services;
 
+import com.github.hanselmito.toymanager.Utils.PasswordUtil;
+import com.github.hanselmito.toymanager.model.Usuario;
+import com.github.hanselmito.toymanager.repositories.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class UsuarioServices {
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
-    /**
-    // Aquí puedes implementar los métodos de servicio para la entidad Usuario
-    // Por ejemplo, métodos para crear, leer, actualizar y eliminar usuarios.
-    // También puedes implementar la lógica de negocio relacionada con los usuarios.
-
-    // Ejemplo de método para obtener un usuario por su ID
-    public Usuario getUsuarioById(Integer id) {
-        // Lógica para obtener un usuario por su ID
-        return null; // Reemplaza esto con la implementación real
+    public Usuario registrarUsuario(Usuario usuario) {
+        usuario.setContrasena(PasswordUtil.hashPassword(usuario.getContrasena()));
+        return usuarioRepository.save(usuario);
     }
-
-    // Otros métodos según sea necesario...
-     **/
 }
