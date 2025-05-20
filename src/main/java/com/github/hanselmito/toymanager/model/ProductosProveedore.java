@@ -1,10 +1,13 @@
 package com.github.hanselmito.toymanager.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -14,16 +17,19 @@ public class ProductosProveedore {
     @EmbeddedId
     private ProductosProveedoreId id;
 
-    @MapsId("productoId")
+    @MapsId("productoSku")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "producto_id", nullable = false)
-    private Producto producto;
+    @JoinColumn(name = "producto_sku", nullable = false)
+    private Producto productoSku;
 
-    @MapsId("proveedorId")
+    @MapsId("proveedorCif")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "proveedor_id", nullable = false)
-    private com.github.hanselmito.toymanager.model.Proveedore proveedor;
+    @JoinColumn(name = "proveedor_cif", nullable = false)
+    private com.github.hanselmito.toymanager.model.Proveedore proveedorCif;
+
+    @NotNull
+    @Column(name = "precio_compra", nullable = false, precision = 10, scale = 2)
+    private BigDecimal precioCompra;
 
 }

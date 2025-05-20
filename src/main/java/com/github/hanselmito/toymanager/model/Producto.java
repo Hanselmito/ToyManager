@@ -16,8 +16,9 @@ import java.util.Set;
 @Table(name = "productos")
 public class Producto {
     @Id
-    @Column(name = "id", nullable = false)
-    private Integer id;
+    @Size(max = 255)
+    @Column(name = "sku", nullable = false)
+    private String sku;
 
     @Size(max = 255)
     @NotNull
@@ -35,12 +36,12 @@ public class Producto {
     private String descripcionCorta;
 
     @NotNull
-    @Column(name = "precio", nullable = false, precision = 10, scale = 2)
-    private BigDecimal precio;
+    @Column(name = "precio_venta", nullable = false, precision = 10, scale = 2)
+    private BigDecimal precioVenta;
 
     @NotNull
-    @Column(name = "cantidad", nullable = false)
-    private Integer cantidad;
+    @Column(name = "stock", nullable = false)
+    private Integer stock;
 
     @NotNull
     @Column(name = "imagen", nullable = false)
@@ -49,10 +50,10 @@ public class Producto {
     @ManyToMany(mappedBy = "productos")
     private Set<Categoria> categorias = new LinkedHashSet<>();
 
-    @ManyToMany(mappedBy = "productos")
-    private Set<com.github.hanselmito.toymanager.model.Proveedore> proveedores = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "productoSku")
+    private Set<ProductosProveedore> productosProveedores = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "productos")
-    private Set<com.github.hanselmito.toymanager.model.ProductosUsuario> productosUsuarios = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "productoSku")
+    private Set<ProductosUsuario> productosUsuarios = new LinkedHashSet<>();
 
 }

@@ -8,6 +8,9 @@ public class ResourceNotFoundException extends RuntimeException {
     private String exceptionDetail;
     private Object fieldValue;
 
+    public ResourceNotFoundException(String s) {
+    }
+
 
     public String getExceptionDetail() {
         return exceptionDetail;

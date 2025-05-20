@@ -9,7 +9,6 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
-import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -20,8 +19,7 @@ import java.util.Set;
 @Table(name = "usuarios")
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "nif", nullable = false)
     private Integer id;
 
     @Size(max = 255)
@@ -53,9 +51,8 @@ public class Usuario {
     @Column(name = "ultimo_acceso", nullable = false)
     private Instant ultimoAcceso;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuarioNif")
     private Set<ProductosUsuario> productosUsuarios = new LinkedHashSet<>();
-
 
     @Override
     public boolean equals(Object o) {
@@ -80,4 +77,5 @@ public class Usuario {
                 ", ultimoAcceso=" + ultimoAcceso +
                 '}';
     }
+
 }

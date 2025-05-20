@@ -2,8 +2,8 @@ package com.github.hanselmito.toymanager.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.Hibernate;
@@ -14,10 +14,11 @@ import java.util.Objects;
 @Setter
 @Embeddable
 public class ProductosCategoriaId implements java.io.Serializable {
-    private static final long serialVersionUID = -2025872717238898366L;
+    private static final long serialVersionUID = -8406826561154184171L;
+    @Size(max = 255)
     @NotNull
-    @Column(name = "productos_id", nullable = false)
-    private Integer productosId;
+    @Column(name = "productos_sku", nullable = false)
+    private String productosSku;
 
     @NotNull
     @Column(name = "categorias_id", nullable = false)
@@ -28,13 +29,13 @@ public class ProductosCategoriaId implements java.io.Serializable {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         ProductosCategoriaId entity = (ProductosCategoriaId) o;
-        return Objects.equals(this.categoriasId, entity.categoriasId) &&
-                Objects.equals(this.productosId, entity.productosId);
+        return Objects.equals(this.productosSku, entity.productosSku) &&
+                Objects.equals(this.categoriasId, entity.categoriasId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(categoriasId, productosId);
+        return Objects.hash(productosSku, categoriasId);
     }
 
 }

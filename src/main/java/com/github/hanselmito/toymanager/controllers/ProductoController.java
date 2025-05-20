@@ -10,32 +10,30 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/productos")
+@RequestMapping("/api/producto")
 public class ProductoController {
 
     @Autowired
-    private ProductoServices productoService;
+    private ProductoServices productoServices;
 
     @PostMapping
-    public ResponseEntity<Producto> crearProducto(@RequestBody Producto producto) {
-        Producto nuevoProducto = productoService.crearProducto(producto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoProducto);
+    public ResponseEntity<Producto> crearProducto(@RequestBody Producto producto, @AuthenticationPrincipal Usuario usuario) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(productoServices.crearProducto(producto, usuario));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Producto> obtenerProducto(@PathVariable Integer id) {
-        return ResponseEntity.ok(productoService.obtenerProductoPorId(id));
+    @GetMapping("/{sku}")
+    public ResponseEntity<Producto> obtenerProducto(@PathVariable String sku) {
+        return ResponseEntity.ok(productoServices.obtenerProductoPorId(sku));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Producto> actualizarProducto(@PathVariable Integer id, @RequestBody Producto producto, @AuthenticationPrincipal Usuario usuario) {
-        producto.setId(id);
-        return ResponseEntity.ok(productoService.actualizarProducto(producto, usuario));
+    @PutMapping("/{sku}")
+    public ResponseEntity<Producto> actualizarProducto(@PathVariable String sku, @RequestBody Producto producto, @AuthenticationPrincipal Usuario usuario) {
+        return ResponseEntity.ok(productoServices.actualizarProducto(sku, producto, usuario));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarProducto(@PathVariable Integer id) {
-        productoService.eliminarProducto(id);
+    @DeleteMapping("/{sku}")
+    public ResponseEntity<Void> eliminarProducto(@PathVariable String sku) {
+        productoServices.eliminarProducto(sku);
         return ResponseEntity.noContent().build();
     }
 }

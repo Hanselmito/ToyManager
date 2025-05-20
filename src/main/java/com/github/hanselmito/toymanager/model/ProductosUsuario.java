@@ -20,17 +20,16 @@ public class ProductosUsuario {
     @EmbeddedId
     private ProductosUsuarioId id;
 
-    @MapsId("usuarioId")
+    @MapsId("usuarioNif")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private com.github.hanselmito.toymanager.model.Usuario usuario;
+    @JoinColumn(name = "usuario_nif", nullable = false)
+    private com.github.hanselmito.toymanager.model.Usuario usuarioNif;
 
-    @MapsId("productosId")
+    @MapsId("productoSku")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "productos_id", nullable = false)
-    private Producto productos;
+    @JoinColumn(name = "producto_sku", nullable = false)
+    private Producto productoSku;
 
     @Size(max = 255)
     @NotNull
@@ -48,12 +47,12 @@ public class ProductosUsuario {
     private String descripcionCorta;
 
     @NotNull
-    @Column(name = "precio", nullable = false, precision = 10, scale = 2)
-    private BigDecimal precio;
+    @Column(name = "precio_venta", nullable = false, precision = 10, scale = 2)
+    private BigDecimal precioVenta;
 
     @NotNull
-    @Column(name = "cantidad", nullable = false)
-    private Integer cantidad;
+    @Column(name = "stock", nullable = false)
+    private Integer stock;
 
     @NotNull
     @Column(name = "imagen", nullable = false)
