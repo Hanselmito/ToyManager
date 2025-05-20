@@ -19,7 +19,6 @@ import java.util.Set;
 @Table(name = "categorias")
 public class Categoria {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -42,8 +41,9 @@ public class Categoria {
     private Set<Categoria> categorias = new LinkedHashSet<>();
 
     @ManyToMany
-    @JoinTable(name = "productos_categorias",
-            joinColumns = @JoinColumn(name = "categorias_id"))
+    @JoinTable(name = "productos_categoria",
+            joinColumns = @JoinColumn(name = "categorias_id"),
+            inverseJoinColumns = @JoinColumn(name = "productos_sku"))
     private Set<com.github.hanselmito.toymanager.model.Producto> productos = new LinkedHashSet<>();
 
 }

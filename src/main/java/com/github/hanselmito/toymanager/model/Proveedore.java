@@ -15,16 +15,16 @@ import java.util.Set;
 @Table(name = "proveedores")
 public class Proveedore {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
+    @Size(max = 255)
+    @Column(name = "cif", nullable = false)
+    private String cif;
 
     @Size(max = 255)
     @NotNull
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @ManyToMany(mappedBy = "proveedores")
-    private Set<Producto> productos = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "proveedorCif")
+    private Set<ProductosProveedore> productosProveedores = new LinkedHashSet<>();
 
 }

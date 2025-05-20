@@ -7,37 +7,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/categorias")
+@RequestMapping("/api/categoria")
 public class CategoriaController {
-    private final CategoriaServices categoriaService;
 
-    public CategoriaController(CategoriaServices categoriaService) {
-        this.categoriaService = categoriaService;
+    private final CategoriaServices categoriaServices;
+
+    public CategoriaController(CategoriaServices categoriaServices) {
+        this.categoriaServices = categoriaServices;
     }
 
     @GetMapping
-    public List<Categoria> getAllCategorias() {
-        return categoriaService.findAll();
+    public List<Categoria> obtenerCategorias() {
+        return categoriaServices.findAll();
     }
 
     @GetMapping("/{id}")
-    public Categoria getCategoriaById(@PathVariable Integer id) {
-        return categoriaService.findById(id);
+    public Categoria obtenerCategoriaPorId(@PathVariable Integer id) {
+        return categoriaServices.findById(id);
     }
 
     @PostMapping
-    public Categoria createCategoria(@RequestBody Categoria categoria) {
-        return categoriaService.save(categoria);
+    public Categoria crearCategoria(@RequestBody Categoria categoria) {
+        return categoriaServices.save(categoria);
     }
 
     @PutMapping("/{id}")
-    public Categoria updateCategoria(@PathVariable Integer id, @RequestBody Categoria categoria) {
+    public Categoria actualizarCategoria(@PathVariable Integer id, @RequestBody Categoria categoria) {
         categoria.setId(id);
-        return categoriaService.save(categoria);
+        return categoriaServices.save(categoria);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCategoria(@PathVariable Integer id) {
-        categoriaService.deleteById(id);
+    public void eliminarCategoria(@PathVariable Integer id) {
+        categoriaServices.deleteById(id);
     }
 }

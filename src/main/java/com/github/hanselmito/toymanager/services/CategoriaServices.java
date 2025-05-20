@@ -35,17 +35,18 @@ public class CategoriaServices {
     }
 
     public List<Categoria> findAll() {
-        return null;
+        return categoriaRepository.findAll();
     }
 
     public Categoria findById(Integer id) {
-        return null;
+        return categoriaRepository.findById(String.valueOf(id)).orElse(null);
     }
 
     public Categoria save(Categoria categoria) {
-        return null;
+        return categoriaRepository.save(categoria);
     }
 
     public void deleteById(Integer id) {
+        categoriaRepository.deleteById(String.valueOf(id));
     }
 }
