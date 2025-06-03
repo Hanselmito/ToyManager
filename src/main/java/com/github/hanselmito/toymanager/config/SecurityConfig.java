@@ -40,9 +40,9 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/usuario/register","/api/usuario/email/{email}","/api/usuario/getById/{id}", "/api/usuario/login", "/api/usuario/updatePerfil"))
+        http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/usuario/register","/api/usuario/email/{email}","/api/usuario/getById/{id}", "/api/usuario/login", "/api/usuario/updatePerfil", "/api/productos/crear", "/api/productos/todos", "/api/productos/conStock", "/api/productos/buscar", "/api/productos/porSku/{sku}", "/api/productos/{sku}"))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/usuario/register","/api/usuario/email/{email}","/api/usuario/getById/{id}", "/api/usuario/login", "/api/usuario/updatePerfil").permitAll()
+                        .requestMatchers("/api/usuario/register","/api/usuario/email/{email}","/api/usuario/getById/{id}", "/api/usuario/login", "/api/usuario/updatePerfil", "/api/productos/crear", "/api/productos/todos", "/api/productos/conStock", "/api/productos/buscar", "/api/productos/porSku/{sku}", "/api/productos/{sku}").permitAll()
                         .anyRequest().authenticated());
         return http.build();
     }

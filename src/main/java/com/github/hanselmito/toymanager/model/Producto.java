@@ -1,5 +1,7 @@
 package com.github.hanselmito.toymanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -34,10 +36,12 @@ public class Producto {
     @NotNull
     @Lob
     @Column(name = "descripcion_corta", nullable = false)
+    @JsonProperty("descripcion_corta")
     private String descripcionCorta;
 
     @NotNull
     @Column(name = "precio_venta", nullable = false, precision = 10, scale = 2)
+    @JsonProperty("precio_venta")
     private BigDecimal precioVenta;
 
     @NotNull
@@ -55,22 +59,10 @@ public class Producto {
     private Set<ProductosProveedore> productosProveedores = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "productoSku")
+    @JsonIgnore
     private Set<ProductosUsuario> productosUsuarios = new LinkedHashSet<>();
 
     public Producto() {
-    }
-
-    public Producto(String sku, String nombre, String descripcion, String descripcionCorta, BigDecimal precioVenta, Integer stock, @NotNull byte[] imagen, Set<Categoria> categorias, Set<ProductosProveedore> productosProveedores, Set<ProductosUsuario> productosUsuarios) {
-        this.sku = sku;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.descripcionCorta = descripcionCorta;
-        this.precioVenta = precioVenta;
-        this.stock = stock;
-        this.imagen = imagen;
-        this.categorias = categorias;
-        this.productosProveedores = productosProveedores;
-        this.productosUsuarios = productosUsuarios;
     }
 
     public String getSku() {
@@ -162,10 +154,8 @@ public class Producto {
                 ", descripcionCorta='" + descripcionCorta + '\'' +
                 ", precioVenta=" + precioVenta +
                 ", stock=" + stock +
-                ", imagen=" + Arrays.toString(imagen) +
+                ", imagen=" + "Arrays.toString(imagen)" +
                 ", categorias=" + categorias +
-                ", productosProveedores=" + productosProveedores +
-                ", productosUsuarios=" + productosUsuarios +
                 '}';
     }
 }

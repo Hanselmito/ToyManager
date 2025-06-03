@@ -49,15 +49,6 @@ public class Categoria {
     public Categoria() {
     }
 
-    public Categoria(Integer id, String nombre, Categoria categoriaPadre, Instant fechaCreacion, Set<Categoria> categorias, Set<Producto> productos) {
-        this.id = id;
-        this.nombre = nombre;
-        this.categoriaPadre = categoriaPadre;
-        this.fechaCreacion = fechaCreacion;
-        this.categorias = categorias;
-        this.productos = productos;
-    }
-
     @Override
     public String toString() {
         return "Categoria{" +
@@ -66,7 +57,6 @@ public class Categoria {
                 ", categoriaPadre=" + categoriaPadre +
                 ", fechaCreacion=" + fechaCreacion +
                 ", categorias=" + categorias +
-                ", productos=" + productos +
                 '}';
     }
 }

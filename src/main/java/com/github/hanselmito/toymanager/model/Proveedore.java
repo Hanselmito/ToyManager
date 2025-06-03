@@ -29,18 +29,12 @@ public class Proveedore {
 
     public Proveedore() {
     }
-    public Proveedore(String cif, String nombre, Set<ProductosProveedore> productosProveedores) {
-        this.cif = cif;
-        this.nombre = nombre;
-        this.productosProveedores = productosProveedores;
-    }
 
     @Override
     public String toString() {
         return "Proveedore{" +
                 "cif='" + cif + '\'' +
                 ", nombre='" + nombre + '\'' +
-                ", productosProveedores=" + productosProveedores +
                 '}';
     }
 }

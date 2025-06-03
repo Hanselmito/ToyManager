@@ -32,7 +32,7 @@ SELECT p FROM Producto p
 
     @Query("""
 SELECT p FROM Producto p
-WHERE p.stock > 0
+WHERE p.stock >= 1
 """)
     List<Producto> findProductosConStock();
     @Query("""
