@@ -1,13 +1,10 @@
 package com.github.hanselmito.toymanager.services;
 
 import com.github.hanselmito.toymanager.Utils.PasswordUtil;
-import com.github.hanselmito.toymanager.exception.ResourceNotFoundException;
 import com.github.hanselmito.toymanager.model.Usuario;
 import com.github.hanselmito.toymanager.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UsuarioServices {
@@ -15,25 +12,33 @@ public class UsuarioServices {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public Usuario registrarUsuario(Usuario usuario) {
+    public Usuario validateCredentials(String email, String password) {
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        if (usuario != null && PasswordUtil.hashPassword(password).equals(usuario.getContrasena())) {
+            return usuario;
+        }
+        return null;
+    }
+
+    public Usuario updateUsuario(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
+
+    public Usuario saveUsuario(Usuario usuario) {
         usuario.setContrasena(PasswordUtil.hashPassword(usuario.getContrasena()));
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario obtenerUsuarioPorId(Integer id) {
-        return usuarioRepository.findById(String.valueOf(id))
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + id));
+    public boolean existUser(String email, String nombre) {
+        return usuarioRepository.existsUsuarioByEmailOrNombre(email, nombre);
     }
 
-    public Usuario actualizarUsuario(Integer id, Usuario usuarioActualizado) {
-        Usuario usuario = obtenerUsuarioPorId(id);
-        usuario.setNombre(usuarioActualizado.getNombre());
-        usuario.setEmail(usuarioActualizado.getEmail());
-        usuario.setImagen(usuarioActualizado.getImagen());
-        return usuarioRepository.save(usuario);
+    public Usuario getUserByEmail(String email) {
+        String normalizedEmail = email.trim().toLowerCase();
+        return usuarioRepository.findByEmail(normalizedEmail);
     }
 
-    public void eliminarUsuario(Integer id) {
-        usuarioRepository.deleteById(String.valueOf(id));
+    public Usuario getUserById(Integer id) {
+        return usuarioRepository.findById(id).orElse(null);
     }
 }

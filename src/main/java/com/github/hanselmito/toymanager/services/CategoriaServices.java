@@ -1,15 +1,11 @@
 package com.github.hanselmito.toymanager.services;
 
 import com.github.hanselmito.toymanager.model.Categoria;
-import com.github.hanselmito.toymanager.model.Producto;
 import com.github.hanselmito.toymanager.repositories.CategoriaRepository;
-import com.github.hanselmito.toymanager.repositories.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class CategoriaServices {
@@ -17,36 +13,38 @@ public class CategoriaServices {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    @Autowired
-    private ProductoRepository productoRepository;
-
-    public void asignarCategorias(Producto producto, Set<Categoria> categorias) {
-        Set<Categoria> categoriasFinales = new LinkedHashSet<>(categorias);
-
-        for (Categoria categoria : categorias) {
-            while (categoria.getCategoriaPadre() != null) {
-                categoriasFinales.add(categoria.getCategoriaPadre());
-                categoria = categoria.getCategoriaPadre();
-            }
-        }
-
-        producto.setCategorias(categoriasFinales);
-        productoRepository.save(producto);
+    /**
+     * Obtiene todas las categorías.
+     */
+    public List<Categoria> obtenerTodasLasCategorias() {
+        return categoriaRepository.findTodasLasCategorias();
     }
 
-    public List<Categoria> findAll() {
-        return categoriaRepository.findAll();
+    /**
+     * Busca categorías por nombre.
+     */
+    public List<Categoria> buscarCategoriasPorNombre(String nombre) {
+        return categoriaRepository.findCategoriasPorNombre(nombre);
     }
 
-    public Categoria findById(Integer id) {
-        return categoriaRepository.findById(String.valueOf(id)).orElse(null);
+    /**
+     * Busca categorías por categoría padre.
+     */
+    public List<Categoria> buscarCategoriasPorCategoriaPadre(Integer idCategoriaPadre) {
+        return categoriaRepository.findCategoriasPorCategoriaPadre(idCategoriaPadre);
     }
 
-    public Categoria save(Categoria categoria) {
+    /**
+     * Guarda una nueva categoría.
+     */
+    public Categoria guardarCategoria(Categoria categoria) {
         return categoriaRepository.save(categoria);
     }
 
-    public void deleteById(Integer id) {
-        categoriaRepository.deleteById(String.valueOf(id));
+    /**
+     * Elimina una categoría por su ID.
+     */
+    public void eliminarCategoriaPorId(Integer id) {
+        categoriaRepository.deleteById(id);
     }
 }

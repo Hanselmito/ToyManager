@@ -46,4 +46,27 @@ public class Categoria {
             inverseJoinColumns = @JoinColumn(name = "productos_sku"))
     private Set<com.github.hanselmito.toymanager.model.Producto> productos = new LinkedHashSet<>();
 
+    public Categoria() {
+    }
+
+    public Categoria(Integer id, String nombre, Categoria categoriaPadre, Instant fechaCreacion, Set<Categoria> categorias, Set<Producto> productos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.categoriaPadre = categoriaPadre;
+        this.fechaCreacion = fechaCreacion;
+        this.categorias = categorias;
+        this.productos = productos;
+    }
+
+    @Override
+    public String toString() {
+        return "Categoria{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", categoriaPadre=" + categoriaPadre +
+                ", fechaCreacion=" + fechaCreacion +
+                ", categorias=" + categorias +
+                ", productos=" + productos +
+                '}';
+    }
 }

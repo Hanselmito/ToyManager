@@ -27,4 +27,20 @@ public class Proveedore {
     @OneToMany(mappedBy = "proveedorCif")
     private Set<ProductosProveedore> productosProveedores = new LinkedHashSet<>();
 
+    public Proveedore() {
+    }
+    public Proveedore(String cif, String nombre, Set<ProductosProveedore> productosProveedores) {
+        this.cif = cif;
+        this.nombre = nombre;
+        this.productosProveedores = productosProveedores;
+    }
+
+    @Override
+    public String toString() {
+        return "Proveedore{" +
+                "cif='" + cif + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", productosProveedores=" + productosProveedores +
+                '}';
+    }
 }

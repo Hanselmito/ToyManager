@@ -4,7 +4,6 @@ import com.github.hanselmito.toymanager.model.Usuario;
 import com.github.hanselmito.toymanager.repositories.UsuarioRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -32,10 +31,19 @@ public class SecurityConfig {
                 throw new UsernameNotFoundException("Usuario no encontrado");
             }
             return User.builder()
-                    .username(usuario.getEmail()) // Devuelve el email como nombre de usuario
+                    .username(usuario.getEmail())
                     .password(usuario.getContrasena())
                     .roles(usuario.getRol().name())
                     .build();
         };
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/usuario/register","/api/usuario/email/{email}","/api/usuario/getById/{id}", "/api/usuario/login", "/api/usuario/updatePerfil"))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/usuario/register","/api/usuario/email/{email}","/api/usuario/getById/{id}", "/api/usuario/login", "/api/usuario/updatePerfil").permitAll()
+                        .anyRequest().authenticated());
+        return http.build();
     }
 }

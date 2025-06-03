@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -56,4 +57,115 @@ public class Producto {
     @OneToMany(mappedBy = "productoSku")
     private Set<ProductosUsuario> productosUsuarios = new LinkedHashSet<>();
 
+    public Producto() {
+    }
+
+    public Producto(String sku, String nombre, String descripcion, String descripcionCorta, BigDecimal precioVenta, Integer stock, @NotNull byte[] imagen, Set<Categoria> categorias, Set<ProductosProveedore> productosProveedores, Set<ProductosUsuario> productosUsuarios) {
+        this.sku = sku;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.descripcionCorta = descripcionCorta;
+        this.precioVenta = precioVenta;
+        this.stock = stock;
+        this.imagen = imagen;
+        this.categorias = categorias;
+        this.productosProveedores = productosProveedores;
+        this.productosUsuarios = productosUsuarios;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getDescripcionCorta() {
+        return descripcionCorta;
+    }
+
+    public void setDescripcionCorta(String descripcionCorta) {
+        this.descripcionCorta = descripcionCorta;
+    }
+
+    public BigDecimal getPrecioVenta() {
+        return precioVenta;
+    }
+
+    public void setPrecioVenta(BigDecimal precioVenta) {
+        this.precioVenta = precioVenta;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
+
+    public Set<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(Set<Categoria> categorias) {
+        this.categorias = categorias;
+    }
+
+    public Set<ProductosProveedore> getProductosProveedores() {
+        return productosProveedores;
+    }
+
+    public void setProductosProveedores(Set<ProductosProveedore> productosProveedores) {
+        this.productosProveedores = productosProveedores;
+    }
+
+    public Set<ProductosUsuario> getProductosUsuarios() {
+        return productosUsuarios;
+    }
+
+    public void setProductosUsuarios(Set<ProductosUsuario> productosUsuarios) {
+        this.productosUsuarios = productosUsuarios;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "sku='" + sku + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", descripcionCorta='" + descripcionCorta + '\'' +
+                ", precioVenta=" + precioVenta +
+                ", stock=" + stock +
+                ", imagen=" + Arrays.toString(imagen) +
+                ", categorias=" + categorias +
+                ", productosProveedores=" + productosProveedores +
+                ", productosUsuarios=" + productosUsuarios +
+                '}';
+    }
 }
