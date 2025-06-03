@@ -135,4 +135,16 @@ public class Usuario {
     }
 
 
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "ultimoAcceso=" + ultimoAcceso +
+                ", imagen=" + Arrays.toString(imagen) +
+                ", rol=" + rol +
+                ", contrasena='" + contrasena + '\'' +
+                ", email='" + email + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }

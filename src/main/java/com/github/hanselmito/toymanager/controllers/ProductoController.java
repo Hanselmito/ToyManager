@@ -1,11 +1,13 @@
 package com.github.hanselmito.toymanager.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.hanselmito.toymanager.model.Producto;
 import com.github.hanselmito.toymanager.services.ProductoServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class ProductoController {
      *
      * @param producto Datos del producto a crear.
      * @return Producto creado o mensaje de error.
-     */
+     *
     @CrossOrigin
     @PostMapping("/crear")
     public ResponseEntity<?> crearProducto(@RequestBody Producto producto, @RequestParam Integer usuarioNif) {
@@ -35,7 +37,7 @@ public class ProductoController {
         } catch (Exception e) {
             return new ResponseEntity<>("Error al crear el producto: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    }**/
 
     /**
      * Obtiene todos los productos disponibles.
@@ -43,10 +45,24 @@ public class ProductoController {
      * @return Lista de productos.
      */
     @CrossOrigin
-    @GetMapping("/todos")
-    public ResponseEntity<List<Producto>> obtenerTodosLosProductos() {
-        List<Producto> productos = productoServices.obtenerTodosLosProductos();
-        return new ResponseEntity<>(productos, HttpStatus.OK);
+    @PostMapping(value = "/crear", consumes = "multipart/form-data")
+    public ResponseEntity<?> crearProducto(
+            @RequestParam("producto") String productoJson,
+            @RequestParam("usuarioNif") Integer usuarioNif,
+            @RequestParam("imagen") MultipartFile imagen) {
+        try {
+            Producto producto = new ObjectMapper().readValue(productoJson, Producto.class);
+            producto.setImagen(imagen.getBytes());
+
+            if (producto.getStock() < 0) {
+                return new ResponseEntity<>("El stock no puede ser negativo.", HttpStatus.BAD_REQUEST);
+            }
+
+            Producto nuevoProducto = productoServices.crearProducto(producto, usuarioNif);
+            return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error al crear el producto: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -81,7 +97,7 @@ public class ProductoController {
      * @return Producto encontrado o mensaje de error.
      */
     @CrossOrigin
-    @GetMapping("/{sku}")
+    @GetMapping("/porSku/{sku}")
     public ResponseEntity<Producto> obtenerProductoPorSku(@PathVariable String sku) {
         Producto producto = productoServices.obtenerProductoPorSku(sku);
         if (producto != null) {
