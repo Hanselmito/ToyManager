@@ -33,7 +33,7 @@ public class ProductosUsuario {
 
     @Size(max = 255)
     @NotNull
-    @Column(name = "nombreProducto", nullable = false)
+    @Column(name = "nombre_producto", nullable = false)
     private String nombreProducto;
 
     @NotNull
@@ -63,4 +63,19 @@ public class ProductosUsuario {
     @Column(name = "fecha_creacion", nullable = false)
     private Instant fechaCreacion;
 
+    public ProductosUsuario() {
+    }
+
+    public ProductosUsuario(ProductosUsuarioId id, Usuario usuarioNif, Producto productoSku, String nombreProducto, String descripcion, String descripcionCorta, BigDecimal precioVenta, Integer stock, @NotNull byte[] imagen, Instant fechaCreacion) {
+        this.id = id;
+        this.usuarioNif = usuarioNif;
+        this.productoSku = productoSku;
+        this.nombreProducto = nombreProducto;
+        this.descripcion = descripcion;
+        this.descripcionCorta = descripcionCorta;
+        this.precioVenta = precioVenta;
+        this.stock = stock;
+        this.imagen = imagen;
+        this.fechaCreacion = fechaCreacion;
+    }
 }

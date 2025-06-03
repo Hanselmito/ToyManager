@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/proveedore")
+@RequestMapping("/api/proveedores")
 public class ProveedoreController {
 
     @Autowired
@@ -40,5 +40,11 @@ public class ProveedoreController {
     @GetMapping
     public ResponseEntity<List<Proveedore>> obtenerTodosLosProveedores() {
         return ResponseEntity.ok(proveedoreServices.obtenerTodosLosProveedores());
+    }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Proveedore>> buscarProveedoresPorNombre(@RequestParam String nombre) {
+        List<Proveedore> proveedores = proveedoreServices.buscarProveedoresPorNombre(nombre);
+        return ResponseEntity.ok(proveedores);
     }
 }

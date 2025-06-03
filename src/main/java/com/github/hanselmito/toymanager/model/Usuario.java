@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -54,6 +55,73 @@ public class Usuario {
     @OneToMany(mappedBy = "usuarioNif")
     private Set<ProductosUsuario> productosUsuarios = new LinkedHashSet<>();
 
+    public Usuario() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
+    public RolTrabajador getRol() {
+        return rol;
+    }
+
+    public void setRol(RolTrabajador rol) {
+        this.rol = rol;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
+
+    public Instant getUltimoAcceso() {
+        return ultimoAcceso;
+    }
+
+    public void setUltimoAcceso(Instant ultimoAcceso) {
+        this.ultimoAcceso = ultimoAcceso;
+    }
+
+    public Set<ProductosUsuario> getProductosUsuarios() {
+        return productosUsuarios;
+    }
+
+    public void setProductosUsuarios(Set<ProductosUsuario> productosUsuarios) {
+        this.productosUsuarios = productosUsuarios;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -66,16 +134,5 @@ public class Usuario {
         return Objects.hash(id, nombre, email);
     }
 
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", email='" + email + '\'' +
-                ", contrasena='" + contrasena + '\'' +
-                ", rol=" + rol +
-                ", ultimoAcceso=" + ultimoAcceso +
-                '}';
-    }
 
 }

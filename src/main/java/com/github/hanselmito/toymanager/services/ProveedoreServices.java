@@ -20,7 +20,7 @@ public class ProveedoreServices {
 
     public Proveedore obtenerProveedorPorCif(String cif) {
         return proveedoreRepository.findById(cif)
-                .orElseThrow(() -> new ResourceNotFoundException("Proveedor no encontrado con CIF: " + cif));
+                .orElseThrow(() -> new ResourceNotFoundException("Proveedor", "CIF: " + cif));
     }
 
     public Proveedore actualizarProveedor(String cif, Proveedore proveedorActualizado) {
@@ -35,5 +35,9 @@ public class ProveedoreServices {
 
     public List<Proveedore> obtenerTodosLosProveedores() {
         return proveedoreRepository.findAll();
+    }
+
+    public List<Proveedore> buscarProveedoresPorNombre(String nombre) {
+        return proveedoreRepository.findProveedoresPorNombre(nombre);
     }
 }
