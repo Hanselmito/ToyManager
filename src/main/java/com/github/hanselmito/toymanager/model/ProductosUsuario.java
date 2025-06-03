@@ -1,5 +1,6 @@
 package com.github.hanselmito.toymanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -24,6 +25,7 @@ public class ProductosUsuario {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "usuario_nif", nullable = false)
+    @JsonIgnore
     private com.github.hanselmito.toymanager.model.Usuario usuarioNif;
 
     @MapsId("productoSku")
@@ -64,18 +66,5 @@ public class ProductosUsuario {
     private Instant fechaCreacion;
 
     public ProductosUsuario() {
-    }
-
-    public ProductosUsuario(ProductosUsuarioId id, Usuario usuarioNif, Producto productoSku, String nombreProducto, String descripcion, String descripcionCorta, BigDecimal precioVenta, Integer stock, @NotNull byte[] imagen, Instant fechaCreacion) {
-        this.id = id;
-        this.usuarioNif = usuarioNif;
-        this.productoSku = productoSku;
-        this.nombreProducto = nombreProducto;
-        this.descripcion = descripcion;
-        this.descripcionCorta = descripcionCorta;
-        this.precioVenta = precioVenta;
-        this.stock = stock;
-        this.imagen = imagen;
-        this.fechaCreacion = fechaCreacion;
     }
 }

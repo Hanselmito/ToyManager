@@ -40,9 +40,17 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/usuario/register","/api/usuario/email/{email}","/api/usuario/getById/{id}", "/api/usuario/login", "/api/usuario/updatePerfil", "/api/productos/crear", "/api/productos/todos", "/api/productos/conStock", "/api/productos/buscar", "/api/productos/porSku/{sku}", "/api/productos/{sku}"))
+        http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/usuario/register","/api/usuario/email/{email}","/api/usuario/getById/{id}", "/api/usuario/login", "/api/usuario/updatePerfil",
+                        "/api/productos/crear", "/api/productos/todos", "/api/productos/conStock", "/api/productos/buscar", "/api/productos/porSku/{sku}", "/api/productos/{sku}",
+                        "/api/productos-usuarios/guardar", "/api/productos-usuarios/usuario/{idUsuario}", "/api/productos-usuarios/usuario/{idUsuario}/producto/{sku}", "/api/productos-usuarios/eliminar",
+                        "/api/categorias/crear", "/api/categorias/todas", "/api/categorias/buscar", "/api/categorias/categoriaPadre/{id}", "/api/categorias/agregarHija/{idCategoriaPadre}", "/api/categorias/eliminar/{id}",
+                        "/api/productos-categoria/guardar", "/api/productos-categoria/categoria/{idCategoria}", "/api/productos-categoria/producto/{skuProducto}", "/api/productos-categoria/eliminar"))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/usuario/register","/api/usuario/email/{email}","/api/usuario/getById/{id}", "/api/usuario/login", "/api/usuario/updatePerfil", "/api/productos/crear", "/api/productos/todos", "/api/productos/conStock", "/api/productos/buscar", "/api/productos/porSku/{sku}", "/api/productos/{sku}").permitAll()
+                        .requestMatchers("/api/usuario/register","/api/usuario/email/{email}","/api/usuario/getById/{id}", "/api/usuario/login", "/api/usuario/updatePerfil",
+                                "/api/productos/crear", "/api/productos/todos", "/api/productos/conStock", "/api/productos/buscar", "/api/productos/porSku/{sku}", "/api/productos/{sku}",
+                                "/api/productos-usuarios/guardar", "/api/productos-usuarios/usuario/{idUsuario}", "/api/productos-usuarios/usuario/{idUsuario}/producto/{sku}", "/api/productos-usuarios/eliminar",
+                                "/api/categorias/crear", "/api/categorias/todas", "/api/categorias/buscar", "/api/categorias/categoriaPadre/{id}", "/api/categorias/agregarHija/{idCategoriaPadre}", "/api/categorias/eliminar/{id}",
+                                "/api/productos-categoria/guardar", "/api/productos-categoria/categoria/{idCategoria}", "/api/productos-categoria/producto/{skuProducto}", "/api/productos-categoria/eliminar").permitAll()
                         .anyRequest().authenticated());
         return http.build();
     }
