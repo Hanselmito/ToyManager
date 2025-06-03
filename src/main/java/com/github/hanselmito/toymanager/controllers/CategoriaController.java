@@ -57,6 +57,16 @@ public class CategoriaController {
     }
 
     /**
+     * Agrega una categoría hija a una categoría padre.
+     */
+    @CrossOrigin
+    @PostMapping("/agregarHija/{idCategoriaPadre}")
+    public ResponseEntity<Categoria> agregarCategoriaHija(@PathVariable Integer idCategoriaPadre, @RequestBody Categoria categoriaHija) {
+        Categoria categoriaActualizada = categoriaServices.agregarCategoriaHija(idCategoriaPadre, categoriaHija);
+        return new ResponseEntity<>(categoriaActualizada, HttpStatus.CREATED);
+    }
+
+    /**
      * Elimina una categoría por su ID.
      */
     @CrossOrigin

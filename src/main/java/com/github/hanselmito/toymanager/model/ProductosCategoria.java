@@ -1,5 +1,6 @@
 package com.github.hanselmito.toymanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class ProductosCategoria {
     @MapsId("categoriasId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "categorias_id", nullable = false)
+    @JsonIgnore
     private Categoria categorias;
 
 }
