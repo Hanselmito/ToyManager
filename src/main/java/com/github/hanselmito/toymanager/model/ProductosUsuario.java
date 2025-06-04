@@ -26,7 +26,7 @@ public class ProductosUsuario {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "usuario_nif", nullable = false)
     @JsonIgnore
-    private com.github.hanselmito.toymanager.model.Usuario usuarioNif;
+    private Usuario usuarioNif;
 
     @MapsId("productoSku")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

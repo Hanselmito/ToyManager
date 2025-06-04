@@ -24,4 +24,6 @@ public class ProductosCategoria {
     @JsonIgnore
     private Categoria categorias;
 
+    public ProductosCategoria() {
+    }
 }

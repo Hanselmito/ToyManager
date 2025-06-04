@@ -26,10 +26,12 @@ public class ProductosProveedore {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "proveedor_cif", nullable = false)
-    private com.github.hanselmito.toymanager.model.Proveedore proveedorCif;
+    private Proveedore proveedorCif;
 
     @NotNull
     @Column(name = "precio_compra", nullable = false, precision = 10, scale = 2)
     private BigDecimal precioCompra;
 
+    public ProductosProveedore() {
+    }
 }
