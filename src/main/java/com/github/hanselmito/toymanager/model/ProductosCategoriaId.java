@@ -24,6 +24,14 @@ public class ProductosCategoriaId implements java.io.Serializable {
     @Column(name = "categorias_id", nullable = false)
     private Integer categoriasId;
 
+    public ProductosCategoriaId(String productosSku, Integer categoriasId) {
+        this.productosSku = productosSku;
+        this.categoriasId = categoriasId;
+    }
+
+    public ProductosCategoriaId() {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

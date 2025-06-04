@@ -48,7 +48,7 @@ public class Categoria {
             joinColumns = @JoinColumn(name = "categorias_id"),
             inverseJoinColumns = @JoinColumn(name = "productos_sku"))
     @JsonIgnore
-    private Set<com.github.hanselmito.toymanager.model.Producto> productos = new LinkedHashSet<>();
+    private Set<Producto> productos = new LinkedHashSet<>();
 
     @PrePersist
     public void prePersist() {
@@ -58,6 +58,54 @@ public class Categoria {
     }
 
     public Categoria() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Categoria getCategoriaPadre() {
+        return categoriaPadre;
+    }
+
+    public void setCategoriaPadre(Categoria categoriaPadre) {
+        this.categoriaPadre = categoriaPadre;
+    }
+
+    public Instant getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Instant fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public Set<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(Set<Categoria> categorias) {
+        this.categorias = categorias;
+    }
+
+    public Set<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(Set<Producto> productos) {
+        this.productos = productos;
     }
 
     @Override

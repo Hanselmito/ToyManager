@@ -25,6 +25,14 @@ public class ProductosProveedoreId implements java.io.Serializable {
     @Column(name = "proveedor_cif", nullable = false)
     private String proveedorCif;
 
+    public ProductosProveedoreId(String productoSku, String proveedorCif) {
+        this.productoSku = productoSku;
+        this.proveedorCif = proveedorCif;
+    }
+
+    public ProductosProveedoreId() {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

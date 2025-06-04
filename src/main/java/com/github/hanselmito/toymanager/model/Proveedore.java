@@ -1,5 +1,6 @@
 package com.github.hanselmito.toymanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -25,9 +26,34 @@ public class Proveedore {
     private String nombre;
 
     @OneToMany(mappedBy = "proveedorCif")
+    @JsonIgnore
     private Set<ProductosProveedore> productosProveedores = new LinkedHashSet<>();
 
     public Proveedore() {
+    }
+
+    public String getCif() {
+        return cif;
+    }
+
+    public void setCif(String cif) {
+        this.cif = cif;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Set<ProductosProveedore> getProductosProveedores() {
+        return productosProveedores;
+    }
+
+    public void setProductosProveedores(Set<ProductosProveedore> productosProveedores) {
+        this.productosProveedores = productosProveedores;
     }
 
     @Override

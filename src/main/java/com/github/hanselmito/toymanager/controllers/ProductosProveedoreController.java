@@ -17,7 +17,7 @@ public class ProductosProveedoreController {
     @Autowired
     private ProductosProveedoreServices productosProveedoreServices;
 
-    @PostMapping
+    @PostMapping("/crear")
     public ResponseEntity<ProductosProveedore> crearProductosProveedore(@RequestBody ProductosProveedore productosProveedore) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productosProveedoreServices.crearProductosProveedore(productosProveedore));
     }

@@ -1,7 +1,9 @@
 package com.github.hanselmito.toymanager.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.hanselmito.toymanager.model.Categoria;
 import com.github.hanselmito.toymanager.model.Producto;
+import com.github.hanselmito.toymanager.model.ProductosProveedore;
 import com.github.hanselmito.toymanager.services.ProductoServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/productos")
@@ -62,6 +65,33 @@ public class ProductoController {
             return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al crear el producto: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    @CrossOrigin
+    @PutMapping("/actualizar/{sku}")
+    public ResponseEntity<?> actualizarProducto(
+            @PathVariable String sku,
+            @RequestBody Producto productoActualizado) {
+        try {
+            Producto producto = productoServices.obtenerProductoPorSku(sku);
+            if (producto == null) {
+                return new ResponseEntity<>("Producto no encontrado con SKU: " + sku, HttpStatus.NOT_FOUND);
+            }
+
+            // Actualizar los datos del producto
+            producto.setNombre(productoActualizado.getNombre());
+            producto.setDescripcion(productoActualizado.getDescripcion());
+            producto.setDescripcionCorta(productoActualizado.getDescripcionCorta());
+            producto.setPrecioVenta(productoActualizado.getPrecioVenta());
+            producto.setStock(productoActualizado.getStock());
+            producto.setCategorias(productoActualizado.getCategorias());
+
+            Producto productoActualizadoFinal = productoServices.actualizarProducto(sku, producto.getCategorias());
+            return new ResponseEntity<>(productoActualizadoFinal, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error al actualizar el producto: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

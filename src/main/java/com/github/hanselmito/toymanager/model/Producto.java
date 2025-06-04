@@ -53,9 +53,11 @@ public class Producto {
     private byte[] imagen;
 
     @ManyToMany(mappedBy = "productos")
+    @JsonIgnore
     private Set<Categoria> categorias = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "productoSku")
+    @JsonIgnore
     private Set<ProductosProveedore> productosProveedores = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "productoSku")

@@ -16,7 +16,7 @@ public class ProveedoreController {
     @Autowired
     private ProveedoreServices proveedoreServices;
 
-    @PostMapping
+    @PostMapping("/crear")
     public ResponseEntity<Proveedore> crearProveedor(@RequestBody Proveedore proveedor) {
         return ResponseEntity.status(HttpStatus.CREATED).body(proveedoreServices.crearProveedor(proveedor));
     }
@@ -26,18 +26,18 @@ public class ProveedoreController {
         return ResponseEntity.ok(proveedoreServices.obtenerProveedorPorCif(cif));
     }
 
-    @PutMapping("/{cif}")
+    @PutMapping("/actualizar/{cif}")
     public ResponseEntity<Proveedore> actualizarProveedor(@PathVariable String cif, @RequestBody Proveedore proveedor) {
         return ResponseEntity.ok(proveedoreServices.actualizarProveedor(cif, proveedor));
     }
 
-    @DeleteMapping("/{cif}")
+    @DeleteMapping("/eliminar/{cif}")
     public ResponseEntity<Void> eliminarProveedor(@PathVariable String cif) {
         proveedoreServices.eliminarProveedor(cif);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
+    @GetMapping("/todos")
     public ResponseEntity<List<Proveedore>> obtenerTodosLosProveedores() {
         return ResponseEntity.ok(proveedoreServices.obtenerTodosLosProveedores());
     }
