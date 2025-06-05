@@ -20,10 +20,6 @@ public class UsuarioServices {
         return null;
     }
 
-    public Usuario updateUsuario(Usuario usuario) {
-        return usuarioRepository.save(usuario);
-    }
-
     public Usuario saveUsuario(Usuario usuario) {
         usuario.setContrasena(PasswordUtil.hashPassword(usuario.getContrasena()));
         return usuarioRepository.save(usuario);

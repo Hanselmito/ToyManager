@@ -24,16 +24,10 @@ public class ProductoServices {
     private CategoriaRepository categoriaRepository;
 
     @Autowired
-    private ProveedoreRepository proveedoreRepository;
-
-    @Autowired
     private ProductosUsuarioRepository productosUsuarioRepository;
 
     @Autowired
     private ProductosCategoriaRepository productosCategoriaRepository;
-
-    @Autowired
-    private ProductosProveedoreRepository productosProveedoreRepository;
 
     /**
      * Guarda un nuevo producto en la base de datos.
@@ -141,19 +135,5 @@ public class ProductoServices {
      */
     public List<Producto> buscarProductosPorNombreOSku(String nombreOSku) {
         return productoRepository.findProductosPorNombreOSku(nombreOSku);
-    }
-
-    /**
-     * Obtiene productos por categoría.
-     */
-    public List<Producto> obtenerProductosPorCategoria(String nombreCategoria) {
-        return productoRepository.findProductosPorCategoria(nombreCategoria);
-    }
-
-    /**
-     * Obtiene productos sin stock.
-     */
-    public List<Producto> obtenerProductosSinStock() {
-        return productoRepository.findProductosSinStock();
     }
 }
