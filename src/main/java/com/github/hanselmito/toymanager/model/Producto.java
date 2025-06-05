@@ -53,7 +53,6 @@ public class Producto {
     private byte[] imagen;
 
     @ManyToMany(mappedBy = "productos")
-    @JsonIgnore
     private Set<Categoria> categorias = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "productoSku")
@@ -65,6 +64,16 @@ public class Producto {
     private Set<ProductosUsuario> productosUsuarios = new LinkedHashSet<>();
 
     public Producto() {
+    }
+
+    public Producto(String sku, String nombre, String descripcion, String descripcionCorta, BigDecimal precioVenta, Integer stock, @NotNull byte[] imagen) {
+        this.sku = sku;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.descripcionCorta = descripcionCorta;
+        this.precioVenta = precioVenta;
+        this.stock = stock;
+        this.imagen = imagen;
     }
 
     public String getSku() {
@@ -157,7 +166,6 @@ public class Producto {
                 ", precioVenta=" + precioVenta +
                 ", stock=" + stock +
                 ", imagen=" + "Arrays.toString(imagen)" +
-                ", categorias=" + categorias +
                 '}';
     }
 }

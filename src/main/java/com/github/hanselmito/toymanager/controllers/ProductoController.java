@@ -22,27 +22,6 @@ public class ProductoController {
     private ProductoServices productoServices;
 
     /**
-     * Crea un nuevo producto.
-     *
-     * @param producto Datos del producto a crear.
-     * @return Producto creado o mensaje de error.
-     *
-    @CrossOrigin
-    @PostMapping("/crear")
-    public ResponseEntity<?> crearProducto(@RequestBody Producto producto, @RequestParam Integer usuarioNif) {
-        try {
-            if (producto.getStock() < 0) {
-                return new ResponseEntity<>("El stock no puede ser negativo.", HttpStatus.BAD_REQUEST);
-            }
-
-            Producto nuevoProducto = productoServices.crearProducto(producto, usuarioNif);
-            return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Error al crear el producto: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }**/
-
-    /**
      * Obtiene todos los productos disponibles.
      *
      * @return Lista de productos.
