@@ -21,4 +21,9 @@ public interface ProductosUsuarioRepository extends JpaRepository<ProductosUsuar
     WHERE pu.usuarioNif.id = :idUsuario AND pu.productoSku.sku = :sku
     """)
     ProductosUsuario findProductoUsuarioByUsuarioAndSku(@Param("idUsuario") Integer idUsuario, @Param("sku") String sku);
+
+    @Query("""
+    SELECT pu FROM ProductosUsuario pu
+    """)
+    List<ProductosUsuario> findAll();
 }
