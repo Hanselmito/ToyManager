@@ -63,4 +63,14 @@ public class ProductosUsuarioController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    /**
+     * Obtiene todos los productos de usuario.
+     */
+    @CrossOrigin
+    @GetMapping("/todos")
+    public ResponseEntity<List<ProductosUsuario>> obtenerTodosLosProductosUsuario() {
+        List<ProductosUsuario> productosUsuario = productosUsuarioServices.obtenerTodosLosProductosUsuario();
+        return new ResponseEntity<>(productosUsuario, HttpStatus.OK);
+    }
 }

@@ -45,4 +45,11 @@ public class ProductosUsuarioServices {
         }
         return false;
     }
+
+    /**
+     * Obtiene todos los productos de usuario.
+     */
+    public List<ProductosUsuario> obtenerTodosLosProductosUsuario() {
+        return productosUsuarioRepository.findAll();
+    }
 }

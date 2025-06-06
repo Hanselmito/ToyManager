@@ -42,7 +42,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/usuario/register","/api/usuario/email/{email}","/api/usuario/getById/{id}", "/api/usuario/login", "/api/usuario/updatePerfil", "/api/usuario/all", "/api/usuario/delete/{id}",
                         "/api/productos/crear", "/api/productos/actualizar/{sku}", "/api/productos/todos", "/api/productos/conStock", "/api/productos/buscar", "/api/productos/porSku/{sku}", "/api/productos/{sku}",
-                        "/api/productos-usuarios/guardar", "/api/productos-usuarios/usuario/{idUsuario}", "/api/productos-usuarios/usuario/{idUsuario}/producto/{sku}", "/api/productos-usuarios/eliminar",
+                        "/api/productos-usuarios/guardar", "/api/productos-usuarios/usuario/{idUsuario}", "/api/productos-usuarios/usuario/{idUsuario}/producto/{sku}", "/api/productos-usuarios/eliminar", "/api/productos-usuarios/todos",
                         "/api/categorias/crear", "/api/categorias/todas", "/api/categorias/buscar", "/api/categorias/categoriaPadre/{id}", "/api/categorias/agregarHija/{idCategoriaPadre}", "/api/categorias/eliminar/{id}",
                         "/api/productos-categoria/guardar", "/api/productos-categoria/categoria/{idCategoria}", "/api/productos-categoria/producto/{skuProducto}", "/api/productos-categoria/eliminar",
                         "/api/proveedores/crear", "/api/proveedores/todos", "/api/proveedores/buscar", "/api/proveedores/{cif}", "/api/proveedores/actualizar/{cif}", "/api/proveedores/eliminar/{cif}",
@@ -50,7 +50,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/usuario/register","/api/usuario/email/{email}","/api/usuario/getById/{id}", "/api/usuario/login", "/api/usuario/updatePerfil", "/api/usuario/all", "/api/usuario/delete/{id}",
                                 "/api/productos/crear", "/api/productos/actualizar/{sku}","/api/productos/todos", "/api/productos/conStock", "/api/productos/buscar", "/api/productos/porSku/{sku}", "/api/productos/{sku}",
-                                "/api/productos-usuarios/guardar", "/api/productos-usuarios/usuario/{idUsuario}", "/api/productos-usuarios/usuario/{idUsuario}/producto/{sku}", "/api/productos-usuarios/eliminar",
+                                "/api/productos-usuarios/guardar", "/api/productos-usuarios/usuario/{idUsuario}", "/api/productos-usuarios/usuario/{idUsuario}/producto/{sku}", "/api/productos-usuarios/eliminar", "/api/productos-usuarios/todos",
                                 "/api/categorias/crear", "/api/categorias/todas", "/api/categorias/buscar", "/api/categorias/categoriaPadre/{id}", "/api/categorias/agregarHija/{idCategoriaPadre}", "/api/categorias/eliminar/{id}",
                                 "/api/productos-categoria/guardar", "/api/productos-categoria/categoria/{idCategoria}", "/api/productos-categoria/producto/{skuProducto}", "/api/productos-categoria/eliminar",
                                 "/api/proveedores/crear", "/api/proveedores/todos", "/api/proveedores/buscar", "/api/proveedores/{cif}", "/api/proveedores/actualizar/{cif}", "/api/proveedores/eliminar/{cif}",
