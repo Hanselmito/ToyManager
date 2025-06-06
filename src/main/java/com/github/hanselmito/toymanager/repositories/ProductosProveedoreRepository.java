@@ -21,4 +21,8 @@ public interface ProductosProveedoreRepository extends JpaRepository<ProductosPr
     WHERE pp.proveedorCif.cif = :cif
     """)
     List<ProductosProveedore> findByProveedorCif(@Param("cif") String cif);
+
+    @Query("SELECT pp FROM ProductosProveedore pp")
+    List<ProductosProveedore> findProductosProveedoresAll();
+
 }

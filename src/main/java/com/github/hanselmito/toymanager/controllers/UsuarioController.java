@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.Instant;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/usuario")
@@ -116,5 +117,22 @@ public class UsuarioController {
 
         Usuario usuarioActualizado = usuarioServices.saveUsuario(usuarioExistente);
         return ResponseEntity.ok(usuarioActualizado);
+    }
+
+    @CrossOrigin
+    @GetMapping("/all")
+    public ResponseEntity<List<Usuario>> getAllUsuarios() {
+        List<Usuario> usuarios = usuarioServices.findAllUsuarios();
+        return ResponseEntity.ok(usuarios);
+    }
+
+    @CrossOrigin
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteUsuario(@PathVariable Integer id) {
+        if (usuarioServices.deleteUsuario(id)) {
+            return ResponseEntity.noContent().build();
+        } else {
+            throw new ResourceNotFoundException("No se ha encontrado el usuario con ID: ", id);
+        }
     }
 }
