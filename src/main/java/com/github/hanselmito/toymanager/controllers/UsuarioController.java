@@ -19,6 +19,16 @@ public class UsuarioController {
     @Autowired
     private UsuarioServices usuarioServices;
 
+    /**
+     * Registra un nuevo usuario.
+     *
+     * @param nif       NIF del usuario
+     * @param nombre    Nombre del usuario
+     * @param email     Email del usuario
+     * @param contrasena Contraseña del usuario
+     * @param imagen    Imagen del usuario
+     * @return Usuario registrado
+     */
     @CrossOrigin
     @PostMapping("/register")
     public ResponseEntity<?> addUser(
@@ -55,6 +65,12 @@ public class UsuarioController {
         return ResponseEntity.status(201).body(nuevoUsuario);
     }
 
+    /**
+     * Registra un nuevo usuario con los datos proporcionados.
+     *
+     * @param "usuario" Objeto Usuario con los datos del nuevo usuario.
+     * @return Usuario registrado
+     */
     @CrossOrigin
     @GetMapping("/email/{email}")
     public ResponseEntity<Usuario> getUserByEmail(@PathVariable String email) {
@@ -66,6 +82,12 @@ public class UsuarioController {
         return ResponseEntity.ok(usuario);
     }
 
+    /**
+     * Obtiene un usuario por su ID.
+     *
+     * @param id ID del usuario
+     * @return Usuario encontrado
+     */
     @CrossOrigin
     @GetMapping("/getById/{id}")
     public ResponseEntity<Usuario> getUserById(@PathVariable Integer id) {
@@ -76,6 +98,12 @@ public class UsuarioController {
         return ResponseEntity.ok(usuario);
     }
 
+    /**
+     * Valida las credenciales de un usuario.
+     *
+     * @param loginRequest Objeto Usuario con email/nombre y contraseña
+     * @return Usuario validado o error 401 si no se encuentra
+     */
     @CrossOrigin
     @PostMapping("/login")
     public ResponseEntity<Usuario> validateCredentials(@RequestBody Usuario loginRequest) {
@@ -89,6 +117,16 @@ public class UsuarioController {
         return ResponseEntity.ok(usuario);
     }
 
+    /**
+     * Actualiza el perfil de un usuario.
+     *
+     * @param id        ID del usuario
+     * @param nombre    Nuevo nombre del usuario
+     * @param email     Nuevo email del usuario
+     * @param contrasena Nueva contraseña del usuario
+     * @param imagen    Nueva imagen del usuario
+     * @return Usuario actualizado
+     */
     @CrossOrigin
     @PutMapping("/updatePerfil")
     public ResponseEntity<Usuario> updatePerfil(
@@ -119,6 +157,11 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioActualizado);
     }
 
+    /**
+     * Obtiene todos los usuarios registrados.
+     *
+     * @return Lista de usuarios
+     */
     @CrossOrigin
     @GetMapping("/all")
     public ResponseEntity<List<Usuario>> getAllUsuarios() {
@@ -126,6 +169,12 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarios);
     }
 
+    /**
+     * Elimina un usuario por su ID.
+     *
+     * @param id ID del usuario a eliminar
+     * @return Respuesta vacía con código 204 si se elimina correctamente
+     */
     @CrossOrigin
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteUsuario(@PathVariable Integer id) {

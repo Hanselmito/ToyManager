@@ -25,48 +25,87 @@ public class ProductosProveedoreServices {
     @Autowired
     private ProveedoreRepository proveedoreRepository;
 
+    /**
+     * Crea una nueva relación entre un producto y un proveedor.
+     *
+     * @param productosProveedore Objeto que contiene la relación a crear.
+     * @return El objeto creado.
+     */
     public ProductosProveedore crearProductosProveedore(ProductosProveedore productosProveedore) {
         if (productosProveedore.getId() == null || productosProveedore.getId().getProductoSku() == null || productosProveedore.getId().getProveedorCif() == null) {
             throw new IllegalArgumentException("El ID compuesto debe contener productoSku y proveedorCif.");
         }
 
-        // Verificar existencia de producto y proveedor
         Producto producto = productoRepository.findById(productosProveedore.getId().getProductoSku())
                 .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con SKU: ", productosProveedore.getId().getProductoSku()));
 
         Proveedore proveedor = proveedoreRepository.findById(productosProveedore.getId().getProveedorCif())
                 .orElseThrow(() -> new ResourceNotFoundException("Proveedor no encontrado con CIF: ", productosProveedore.getId().getProveedorCif()));
 
-        // Configurar relaciones
         productosProveedore.setProductoSku(producto);
         productosProveedore.setProveedorCif(proveedor);
 
         return productosProveedoreRepository.save(productosProveedore);
     }
 
+    /**
+     * Obtiene un producto proveedor por su ID compuesto.
+     *
+     * @param id ID compuesto del producto proveedor.
+     * @return El objeto ProductosProveedore encontrado.
+     */
     public ProductosProveedore obtenerProductosProveedorePorId(ProductosProveedoreId id) {
         return productosProveedoreRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ProductosProveedore", "ID: " + id));
     }
 
+    /**
+     * Actualiza un producto proveedor existente.
+     *
+     * @param id ID compuesto del producto proveedor a actualizar.
+     * @param productosProveedoreActualizado Objeto con los nuevos datos.
+     * @return El objeto actualizado.
+     */
     public ProductosProveedore actualizarProductosProveedore(ProductosProveedoreId id, ProductosProveedore productosProveedoreActualizado) {
         ProductosProveedore productosProveedore = obtenerProductosProveedorePorId(id);
         productosProveedore.setPrecioCompra(productosProveedoreActualizado.getPrecioCompra());
         return productosProveedoreRepository.save(productosProveedore);
     }
 
+    /**
+     * Elimina un producto proveedor por su ID compuesto.
+     *
+     * @param id ID compuesto del producto proveedor a eliminar.
+     */
     public void eliminarProductosProveedore(ProductosProveedoreId id) {
         productosProveedoreRepository.deleteById(id);
     }
 
+    /**
+     * Obtiene todos los productos proveedores asociados a un producto por su SKU.
+     *
+     * @param sku SKU del producto.
+     * @return Lista de ProductosProveedore asociados al producto.
+     */
     public List<ProductosProveedore> obtenerPorProductoSku(String sku) {
         return productosProveedoreRepository.findByProductoSku(sku);
     }
 
+    /**
+     * Obtiene todos los productos proveedores asociados a un proveedor por su CIF.
+     *
+     * @param cif CIF del proveedor.
+     * @return Lista de ProductosProveedore asociados al proveedor.
+     */
     public List<ProductosProveedore> obtenerPorProveedorCif(String cif) {
         return productosProveedoreRepository.findByProveedorCif(cif);
     }
 
+    /**
+     * Obtiene todos los productos proveedores.
+     *
+     * @return Lista de todos los ProductosProveedore.
+     */
     public List<ProductosProveedore> obtenerTodosLosProductosProveedores() {
         return productosProveedoreRepository.findProductosProveedoresAll();
     }

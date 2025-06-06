@@ -1,9 +1,7 @@
 package com.github.hanselmito.toymanager.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.hanselmito.toymanager.model.Categoria;
 import com.github.hanselmito.toymanager.model.Producto;
-import com.github.hanselmito.toymanager.model.ProductosProveedore;
 import com.github.hanselmito.toymanager.services.ProductoServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api/productos")
@@ -48,6 +45,13 @@ public class ProductoController {
     }
 
 
+    /**
+     * Actualiza un producto existente por su SKU.
+     *
+     * @param sku SKU del producto a actualizar.
+     * @param productoActualizado Objeto Producto con los datos actualizados.
+     * @return Producto actualizado o mensaje de error.
+     */
     @CrossOrigin
     @PutMapping("/actualizar/{sku}")
     public ResponseEntity<?> actualizarProducto(
@@ -59,7 +63,6 @@ public class ProductoController {
                 return new ResponseEntity<>("Producto no encontrado con SKU: " + sku, HttpStatus.NOT_FOUND);
             }
 
-            // Actualizar los datos del producto
             producto.setNombre(productoActualizado.getNombre());
             producto.setDescripcion(productoActualizado.getDescripcion());
             producto.setDescripcionCorta(productoActualizado.getDescripcionCorta());
