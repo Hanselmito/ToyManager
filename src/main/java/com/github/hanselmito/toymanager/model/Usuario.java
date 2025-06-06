@@ -138,13 +138,13 @@ public class Usuario {
     @Override
     public String toString() {
         return "Usuario{" +
-                "ultimoAcceso=" + ultimoAcceso +
-                ", imagen=" + Arrays.toString(imagen) +
-                ", rol=" + rol +
-                ", contrasena='" + contrasena + '\'' +
-                ", email='" + email + '\'' +
+                "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", id=" + id +
+                ", email='" + email + '\'' +
+                ", contrasena='" + contrasena + '\'' +
+                ", rol=" + rol +
+                ", imagen=" + Arrays.toString(imagen) +
+                ", ultimoAcceso=" + ultimoAcceso +
                 '}';
     }
 }

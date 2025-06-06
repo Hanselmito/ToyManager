@@ -56,4 +56,9 @@ public class ProductosProveedoreController {
     public ResponseEntity<List<ProductosProveedore>> obtenerPorProveedorCif(@PathVariable String cif) {
         return ResponseEntity.ok(productosProveedoreServices.obtenerPorProveedorCif(cif));
     }
+
+    @GetMapping("/todos")
+    public ResponseEntity<List<ProductosProveedore>> obtenerTodosLosProductosProveedores() {
+        return ResponseEntity.ok(productosProveedoreServices.obtenerTodosLosProductosProveedores());
+    }
 }

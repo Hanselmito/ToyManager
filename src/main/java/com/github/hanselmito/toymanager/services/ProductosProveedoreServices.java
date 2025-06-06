@@ -66,4 +66,8 @@ public class ProductosProveedoreServices {
     public List<ProductosProveedore> obtenerPorProveedorCif(String cif) {
         return productosProveedoreRepository.findByProveedorCif(cif);
     }
+
+    public List<ProductosProveedore> obtenerTodosLosProductosProveedores() {
+        return productosProveedoreRepository.findProductosProveedoresAll();
+    }
 }

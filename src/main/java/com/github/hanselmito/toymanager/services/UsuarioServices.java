@@ -6,6 +6,8 @@ import com.github.hanselmito.toymanager.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioServices {
 
@@ -36,5 +38,17 @@ public class UsuarioServices {
 
     public Usuario getUserById(Integer id) {
         return usuarioRepository.findById(id).orElse(null);
+    }
+
+    public List<Usuario> findAllUsuarios() {
+        return usuarioRepository.findAll();
+    }
+
+    public boolean deleteUsuario(Integer id) {
+        if (usuarioRepository.existsById(id)) {
+            usuarioRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
