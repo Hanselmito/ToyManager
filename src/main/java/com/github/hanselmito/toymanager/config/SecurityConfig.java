@@ -15,11 +15,26 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
+    /**
+     * Configuración de seguridad para la aplicación.
+     * Define las reglas de autorización y autenticación.
+     *
+     * @param "http" La configuración de seguridad HTTP.
+     * @return El objeto SecurityFilterChain configurado.
+     * @throws Exception Si ocurre un error durante la configuración.
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Servicio de detalles de usuario para la autenticación.
+     * Busca usuarios por email o nombre.
+     *
+     * @param usuarioRepository Repositorio de usuarios.
+     * @return UserDetailsService configurado.
+     */
     @Bean
     public UserDetailsService userDetailsService(UsuarioRepository usuarioRepository) {
         return username -> {
@@ -38,6 +53,14 @@ public class SecurityConfig {
         };
     }
 
+    /**
+     * Configuración del filtro de seguridad HTTP.
+     * Define las rutas y permisos de acceso.
+     *
+     * @param http La configuración de seguridad HTTP.
+     * @return El objeto SecurityFilterChain configurado.
+     * @throws Exception Si ocurre un error durante la configuración.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.ignoringRequestMatchers("/api/usuario/register","/api/usuario/email/{email}","/api/usuario/getById/{id}", "/api/usuario/login", "/api/usuario/updatePerfil", "/api/usuario/all", "/api/usuario/delete/{id}",

@@ -7,6 +7,13 @@ import java.io.File;
 import java.io.IOException;
 
 public class ImageToByte {
+
+    /**
+     * Convierte una imagen en un arreglo de bytes.
+     *
+     * @param imagePath Ruta de la imagen a convertir.
+     * @return Arreglo de bytes que representa la imagen, o null si ocurre un error.
+     */
     public static byte[] imageToBytes(String imagePath) {
         File imageFile = new File(imagePath);
         if (!imageFile.exists()) {

@@ -36,19 +36,16 @@ public class ProductoServices {
         Usuario usuario = usuarioRepository.findById(usuarioNif)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con NIF: ", usuarioNif));
 
-        // Verificar si las categorías existen
         if (producto.getCategorias() != null && !producto.getCategorias().isEmpty()) {
             Set<Categoria> categoriasValidas = new LinkedHashSet<>();
             for (Categoria categoria : producto.getCategorias()) {
                 categoriaRepository.findById(categoria.getId()).ifPresent(categoriasValidas::add);
             }
-            producto.setCategorias(categoriasValidas); // Asignar solo las categorías válidas
+            producto.setCategorias(categoriasValidas);
         }
 
-        // Guardar el producto
         Producto productoGuardado = productoRepository.save(producto);
 
-        // Crear relaciones en ProductosCategoria
         if (producto.getCategorias() != null) {
             for (Categoria categoria : producto.getCategorias()) {
                 ProductosCategoria productosCategoria = new ProductosCategoria();
@@ -59,7 +56,6 @@ public class ProductoServices {
             }
         }
 
-        // Crear relación en ProductosUsuario
         ProductosUsuario productosUsuario = new ProductosUsuario();
         productosUsuario.setId(new ProductosUsuarioId(usuarioNif, productoGuardado.getSku()));
         productosUsuario.setUsuarioNif(usuario);
@@ -77,6 +73,9 @@ public class ProductoServices {
         return productoGuardado;
     }
 
+    /**
+     * Actualiza un producto existente.
+     */
     public Producto actualizarProducto(String sku, Set<Categoria> categorias) {
         Producto producto = productoRepository.findById(sku)
                 .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con SKU: ", sku));
